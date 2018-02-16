@@ -278,17 +278,6 @@ class Service
      */
     private function xml2array($xml)
     {
-        $arr = array();
-        foreach ($xml as $element) {
-            /** @var \SimpleXmlElement $element */
-            $tag = $element->getName();
-            $e = get_object_vars($element);
-            $arr[$tag] = trim($element);
-            if (!empty($e)) {
-                $arr[$tag] = $element instanceof \SimpleXMLElement ? $this->xml2array($element) : $e;
-            }
-        }
-
-        return $arr;
+        return json_decode(json_encode($xml), true);
     }
 }
